@@ -2,52 +2,64 @@
 
 // test
 
-function submitData() {
-  const users = document.getElementById("users");
-  users.addEventListener("submit", function (event) {
-    event.preventDefault();
-    // console.log("Hey");
+function submitData(name, email) {
+  // const users = document.getElementById("users");
+  // users.addEventListener("submit", function (event) {
+  //   event.preventDefault();
+  //   // console.log("Hey");
 
-    let form = {
-      userName: null,
-      email: null,
-    };
+  //   let form = {
+  //     userName: null,
+  //     email: null,
+  //   };
 
-    const userName = document.getElementById("userName").value;
-    const email = document.getElementById("email").value;
+    // const userName = "Dan";
+    // document.getElementById("userName").value;
+
+    // const email = "dan@123";
+    // document.getElementById("email").value;
     // console.log("present")
 
-    if (userName && email) {
-      form = {
-        userName: userName,
-        email: email,
-      };
-    }
+    // if (userName && email) {
+    //   form = {
+    //     userName: userName,
+    //     email: email,
+    //   };
+    // }
 
-    fetch(`http://localhost:3000/users`, {
+    return fetch(`http://localhost:3000/users`, {
       method: "POST",
-      body: JSON.stringify({
-        name: userName,
-        email: email,
-      }),
       headers: {
         "Content-Type": "application/json",
+        "Accept": "application/json"
       },
+
+      body: JSON.stringify({
+        name,
+        //  name,
+        email
+        // email,
+      }),
+     
     })
       .then((response) => response.json())
       .then((data) => {
-        alert("New User added successfully");
+        document.body.innerHTML = data.id
+
+        // alert("New User added successfully");
       })
       .catch((error) => {
-        alert("Please try again");
-        console.log(error);
+
+      document.body.innerHTML = error.message
+        // alert("Please try again");
+        // console.log(error);
       });
 
-    console.log(userName, "", email, "");
-  });
-}
+    // console.log(name, "", email, "");
+  };
 
-submitData();
+
+// submitData();
 
 
 
